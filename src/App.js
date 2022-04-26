@@ -1,25 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import AppDrawer from './components/AppDrawer';
+import Landing from './components/OnBoarding/Landing';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    props.userSessionState.authenticated? <AppDrawer /> : <Landing />
   );
 }
 
-export default App;
+
+const mapStateToProps = (state) => ({
+  userSessionState: state.UserSession.value
+})
+export default connect(mapStateToProps)(App)
+
